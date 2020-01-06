@@ -1,4 +1,7 @@
-class LRUCache:
+from collections import OrderedDict
+
+
+class LRUCacheListAndDict:
     """504ms太慢，只打败10%，空间也太多，只打败20%"""
     def __init__(self, capacity: int):
         self.capacity_record = [None] * capacity
@@ -11,7 +14,6 @@ class LRUCache:
             self.capacity_record.remove(key)
             self.capacity_record.insert(0, key)
             return self.cache[key]
-
 
     def put(self, key: int, value: int) -> None:
         if key in self.cache.keys():
@@ -27,6 +29,25 @@ class LRUCache:
             self.capacity_record.insert(0, key)
             self.cache[key] = value
 
+class LRUCache:
+    """collections.OrderedDict"""
+    def __init__(self, capacity: int):
+        self.cache = OrderedDict()
+        self.capacity = capacity
+
+    def get(self, key: int) -> int:
+        if key not in self.cache:
+            return -1
+        else:
+            self.cache.move_to_end(key, last=False)
+            return self.cache[key]
+
+    def put(self, key: int, value: int) -> None:
+        self.cache[key] = value
+        self.cache.move_to_end(key, last=False)
+        if len(self.cache) > self.capacity:
+            self.cache.popitem()
+
 if __name__ == '__main__':
     cache = LRUCache(2)
     print(cache.put(1, 1))
@@ -41,10 +62,10 @@ if __name__ == '__main__':
     cache1 = LRUCache(2)
     print(cache1.put(2, 1))
     print(cache1.put(2, 2))
-    print(cache1.get(2))
+    print(cache1.get(2)) #2
     print(cache1.put(1, 1))
     print(cache1.put(4, 1))
-    print(cache1.get(2))
+    print(cache1.get(2)) #-1
 
 
 
