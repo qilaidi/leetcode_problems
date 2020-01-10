@@ -1,24 +1,19 @@
 import math
+from functools import lru_cache
 
-from leetcode_problems.utils.timer import timethis
+from utils.timer import timethis
 
 
 class Solution:
-    def uniquePaths_stupid_recursive(self, m: int, n: int) -> int:
-        """递归，超时了"""
-        paths = 0
+    @timethis
+    def uniquePaths_cache_recursive(self, m: int, n: int) -> int:
+        """递归，加cache"""
+        @lru_cache(None)
         def generate_path(m_steps, n_steps):
-            nonlocal paths
-            if m_steps == 0 and n_steps == 0:
-                paths += 1
-                return
-            if m_steps > 0:
-                generate_path(m_steps - 1, n_steps)
-            if n_steps > 0:
-                generate_path(m_steps, n_steps - 1)
-
-        generate_path(m-1, n-1)
-        return paths
+            if m_steps == 0 or n_steps == 0:
+                return 1
+            return generate_path(m_steps - 1, n_steps) + generate_path(m_steps, n_steps - 1)
+        return generate_path(m-1, n-1)
 
     def uniquePaths_forloop(self, m, n):
         """排列组合"""
@@ -32,14 +27,14 @@ class Solution:
 
     @timethis
     def uniquePaths_factorial(self, m, n):
-        """排列组合-使用阶乘函数"""
+        """排列组合-使用阶乘函数: O(1)"""
         # c(N, k) = N!/(k!(N-k)!)
         # N = m+n-2, k = m-1
         return int(math.factorial(m+n-2)/(math.factorial(m-1)*math.factorial(n-1)))
 
     @timethis
     def uniquePaths(self, m, n):
-        """动态规划"""
+        """动态规划O(n^2)"""
         process = [1] * n
         for i in range(1, m):
             for j in range(1, n):
@@ -48,6 +43,6 @@ class Solution:
 
 if __name__ == '__main__':
     test = Solution()
-    print(test.uniquePaths_factorial(3, 2)) #3
-    print(test.uniquePaths_factorial(7, 3)) #28
-    print(test.uniquePaths_factorial(99,99))
+    print(test.uniquePaths_stupid_recursive(3, 2)) #3
+    print(test.uniquePaths_stupid_recursive(7, 3)) #28
+    print(test.uniquePaths_stupid_recursive(99,99)) #5716592448890534538025559599823267555746984381052513943552
