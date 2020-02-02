@@ -43,7 +43,7 @@ class Solution:
 
         return max_area
 
-    def largestRectangleArea(self, height):
+    def largestRectangleArea_1(self, height):
         height.append(0)
         stack = [-1]
         ans = 0
@@ -56,6 +56,18 @@ class Solution:
         height.pop()
         return ans
 
+    def largestRectangleArea(self, height):
+        """第二遍"""
+        height.append(0)
+        ans, stack = 0, [-1]
+        for i in range(len(height)):
+            while height[i] < height[stack[-1]]:
+                h = height[stack.pop()]
+                w = i - stack[-1] - 1
+                ans = max(ans, h * w)
+            stack.append(i)
+        # height.pop()
+        return ans
 
 if __name__ == '__main__':
     test = Solution()

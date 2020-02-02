@@ -1,6 +1,6 @@
 from functools import lru_cache
 
-from utils.timer import timethis
+from leetcode_problems.utils.timer import timethis
 
 
 class Solution:
@@ -66,6 +66,19 @@ class Solution:
         generate_one_steps(0, n)
         return count
 
+    def climbStairs_2(self, n: int) -> int:
+        """第二遍"""
+        temp, res = 2, 3
+        if n <= 3:
+            return n
+        for i in range(4, n + 1):
+            temp, res = res, (temp + res)
+        return res
+
 if __name__ == '__main__':
     test = Solution()
-    print(test.climbStairs_3_recent_diff(6))
+    print(test.climbStairs_2(1))
+    print(test.climbStairs_2(2))
+    print(test.climbStairs_2(3))
+    print(test.climbStairs_2(4))
+    print(test.climbStairs_2(5))
