@@ -12,7 +12,7 @@ class Solution:
         generate_queens([], [], [])
         return [["." * x + "Q" + "." * (n - 1 - x) for x in solution] for solution in queen_board]
 
-    def solveNQueens(self, n):
+    def solveNQueens_2(self, n):
         """2"""
         queen_board = []
         def generate_queens(col, pie, na):
@@ -25,6 +25,18 @@ class Solution:
         generate_queens([], [], [])
         return [["."*x+"Q"+"."*(n-x-1) for x in solution] for solution in queen_board]
 
+    def solveNQueens(self, n):
+        def generate_queens(col, pie, na):
+            row = len(col)
+            if row == n:
+                queen_board.append(col)
+            for i in range(n):
+                if i not in col and row + i not in pie and row - i not in na:
+                    generate_queens(col+[i], pie+[row+i], na+[row-i])
+        queen_board = []
+        generate_queens([], [], [])
+        print(queen_board)
+        return [["."*i+"Q"+"."*(n-i-1) for i in solution] for solution in queen_board]
 
 if __name__ == '__main__':
     test = Solution()
