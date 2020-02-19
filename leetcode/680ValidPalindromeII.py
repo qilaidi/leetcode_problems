@@ -14,6 +14,7 @@ class Solution:
         return False
 
     def validPalindrome(self, s: str) -> bool:
+        """92 ms, faster than 88.53%"""
         left, right = 0, len(s) - 1
         while left < right:
             if s[left] != s[right]:
