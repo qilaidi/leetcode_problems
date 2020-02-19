@@ -15,7 +15,7 @@ class Solution:
         return new_s == new_s[::-1]
 
     def isPalindrome(self, s: str) -> bool:
-        """32ms"""
+        """Runtime: 32 ms, faster than 97.27%"""
         s = re.sub("[^a-zA-Z0-9]", "", s).lower()
         return s == s[::-1]
 
