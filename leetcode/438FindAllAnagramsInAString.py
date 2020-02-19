@@ -30,6 +30,7 @@ class Solution:
         return res
 
     def findAnagrams(self, s, p):
+        """牛逼的办法，好好学习下"""
         def counter(s):
             return [s.count(c) for c in string.ascii_lowercase]
         ord_a = ord('a')
