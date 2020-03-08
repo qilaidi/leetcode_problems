@@ -3,7 +3,7 @@
 # Create on 2020/2/19
 
 class Solution:
-    def longestPalindrome(self, s):
+    def longestPalindrome_brute_optimize(self, s):
         def generate_palindrome(s, left, right):
             """956 ms, faster than 75.73% of Python3"""
             while left >= 0 and right < len(s) and s[left] == s[right]:
@@ -27,6 +27,20 @@ class Solution:
                 begin = i - length - 1
                 length += 2
         return s[begin:begin + length]
+
+    def longestPalindrome(self, s):
+        """DP"""
+        res = ""
+        m = len(s)
+        dp = [[0] * m for _ in range(m)]
+        # dp[i][j] = true的话表示index从i到j的子串是回文串
+        for i in range(m-1, -1, -1):
+            for j in range(i, m):
+                dp[i][j] =  s[i] == s[j] and (j - i < 2 or dp[i+1][j-1])
+                if dp[i][j] and j - i + 1 > len(res):
+                    res = s[i:j+1]
+        return res
+
 
 
 if __name__ == '__main__':
