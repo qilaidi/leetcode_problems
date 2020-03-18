@@ -1,9 +1,9 @@
 from functools import lru_cache
 
-from utils.timer import timethis
+from leetcode_problems.utils.timer import timethis
 
 
-class Solution:
+class Solution1:
     @lru_cache(None)
     @timethis
     def climbStairs_fool_recursive(self, n):
@@ -72,6 +72,30 @@ class Solution:
             return n
         return self.climbStairs_second_time(n - 1) + self.climbStairs_second_time(n - 2)
 
+    def climbStairs_2(self, n: int) -> int:
+        """第二遍"""
+        temp, res = 2, 3
+        if n <= 3:
+            return n
+        for i in range(4, n + 1):
+            temp, res = res, (temp + res)
+        return res
+
+class Solution:
+    def climbStairs(self, n: int) -> int:
+        if n < 3:
+            return n
+        prev, current = 1, 2
+        for i in range(3, n + 1):
+            temp = current
+            current += prev
+            prev = temp
+        return current
+
 if __name__ == '__main__':
     test = Solution()
-    print(test.climbStairs_3_recent_diff(6))
+    print(test.climbStairs(1))
+    print(test.climbStairs(2))
+    print(test.climbStairs(3))
+    print(test.climbStairs(4))
+    print(test.climbStairs(5))
