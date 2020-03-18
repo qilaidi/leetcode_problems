@@ -26,7 +26,23 @@ class Solution:
                 process.append([current + ")", left, right - 1])
         return results
 
+    def generateParenthesis_2_dfs(self, n):
+        """第二遍dfs"""
+        solution = []
+
+        def dfs(left, right, solu, solution):
+            if left == 0 and right == 0:
+                solution.append(solu)
+            if left > 0:
+                dfs(left - 1, right, solu+"(", solution)
+            if right > 0 and right > left:
+                dfs(left, right - 1, solu+")", solution)
+
+        dfs(n, n, "", solution)
+        return solution
+
+
 if __name__ == '__main__':
     test = Solution()
-    print(test.generateParenthesis_bfs(3))
+    print(test.generateParenthesis_2_dfs(3))
 

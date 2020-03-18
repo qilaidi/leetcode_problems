@@ -66,6 +66,12 @@ class Solution:
         generate_one_steps(0, n)
         return count
 
+    def climbStairs_second_time(self, n):
+        """第二遍递归"""
+        if n < 3:
+            return n
+        return self.climbStairs_second_time(n - 1) + self.climbStairs_second_time(n - 2)
+
 if __name__ == '__main__':
     test = Solution()
     print(test.climbStairs_3_recent_diff(6))
