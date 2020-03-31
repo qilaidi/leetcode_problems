@@ -1,27 +1,31 @@
 # -*- encoding: utf-8 -*-
 # Create by zq
-# Create on 2020/3/26
+# Create on 2020/3/31
 from leetcode_problems.leetcode.common_tools.list_node import ListNode
 
 
 class Solution:
-    def hasCycle_normal(self, head: ListNode) -> bool:
+    def detectCycle(self, head: ListNode) -> ListNode:
         memo = []
         while head:
             if head in memo:
-                return True
+                return head
             memo.append(head)
             head = head.next
-        return False
+        return None
 
-    def hasCycle(self, head: ListNode) -> bool:
-        if not head or not head.next:
-            return False
-        walker = runner = head
+    def detectCycle_double_(self, head: ListNode) -> ListNode:
+        walker, runner = head, head
         while runner and runner.next:
             walker = walker.next
             runner = runner.next.next
             if runner == walker:
-                return True
-        return False
+                break
+        else:
+            return None
+        while head != walker:
+            head = head.next
+            walker = walker.next
+        return head
+
 
