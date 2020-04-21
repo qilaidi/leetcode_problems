@@ -9,6 +9,8 @@ class ListNode:
 
     @classmethod
     def generate(self, a_list):
+        if not a_list:
+            return None
         list_node = [ListNode(x) for x in a_list]
         for i in range(len(list_node)):
             if i == len(list_node) - 1:
