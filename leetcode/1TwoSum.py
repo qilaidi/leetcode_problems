@@ -1,4 +1,6 @@
-from utils.timer import timethis
+from typing import List
+
+from leetcode_problems.utils.timer import timethis
 
 
 class Solution:
@@ -13,7 +15,7 @@ class Solution:
     2. dict 
     """
     @timethis
-    def twoSum(self, nums, target):
+    def twoSum1(self, nums, target):
         """
         解法一
         """
@@ -23,7 +25,7 @@ class Solution:
                 return [i, nums[i+1:].index(find_num) + i + 1]
 
     @timethis
-    def twoSum1(self, nums, target):
+    def twoSum2(self, nums, target):
         """
         解法2：使用被找的数字作为key，将主动找的下标作为value
         """
@@ -34,13 +36,23 @@ class Solution:
             else:
                 d[target-nums[i]] = i
 
+    def twoSum(self, nums: List[int], target: int) -> List[int]:
+        d = {}
+        for i in range(len(nums)):
+            if nums[i] in d:
+                return [i, d[nums[i]]]
+            else:
+                d[target-nums[i]] = i
+
+
+
 
 
 
 if __name__ == '__main__':
     test = Solution()
-    print(test.twoSum1([2, 7, 11, 15], 9))
-    print(test.twoSum1([3, 3], 6))
+    print(test.twoSum([2, 7, 11, 15], 9))
+    print(test.twoSum([3, 3], 6))
 
 
 
