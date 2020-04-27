@@ -1,3 +1,6 @@
+from typing import List
+
+
 class Solution:
     def largestRectangleArea_divide_conquer(self, heights):
         """分治，超时，分治的优化，线段树，看球不懂"""
@@ -56,7 +59,7 @@ class Solution:
         height.pop()
         return ans
 
-    def largestRectangleArea(self, height):
+    def largestRectangleArea1(self, height):
         """第二遍"""
         height.append(0)
         ans, stack = 0, [-1]
@@ -67,6 +70,18 @@ class Solution:
                 ans = max(ans, h * w)
             stack.append(i)
         # height.pop()
+        return ans
+
+    def largestRectangleArea(self, heights: List[int]) -> int:
+        """第三遍"""
+        heights.append(0)
+        ans, stack = 0, [-1]
+        for i in range(len(heights)):
+            while heights[i] < heights[stack[-1]]:
+                h = heights[stack.pop()]
+                w = i - stack[-1] - 1
+                ans = max(ans, h * w)
+            stack.append(i)
         return ans
 
 if __name__ == '__main__':
