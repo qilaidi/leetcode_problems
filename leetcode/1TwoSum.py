@@ -36,7 +36,7 @@ class Solution:
             else:
                 d[target-nums[i]] = i
 
-    def twoSum(self, nums: List[int], target: int) -> List[int]:
+    def twoSum1(self, nums: List[int], target: int) -> List[int]:
         d = {}
         for i in range(len(nums)):
             if nums[i] in d:
@@ -44,6 +44,14 @@ class Solution:
             else:
                 d[target-nums[i]] = i
 
+    def twoSum(self, nums: List[int], target: int) -> List[int]:
+        "2刷"
+        dic, n = {}, len(nums)
+        for i in range(n):
+            if nums[i] in dic:
+                return [dic[nums[i]], i]
+            else:
+                dic[target-nums[i]] = i
 
 
 
