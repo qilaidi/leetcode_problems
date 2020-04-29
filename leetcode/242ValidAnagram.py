@@ -1,4 +1,6 @@
-from utils.timer import timethis
+import collections
+
+from leetcode_problems.utils.timer import timethis
 
 
 class Solution:
@@ -70,10 +72,18 @@ class Solution:
             dic2[ord(item) - ord('a')] += 1
         return dic1 == dic2
 
+    def isAnagram(self, s: str, t: str) -> bool:
+        "2刷"
+        dic1, dic2 = collections.defaultdict(int), collections.defaultdict(int)
+        for ch in s:
+            dic1[ch] += 1
+        for ch in t:
+            dic2[ch] += 1
+        return dic1 == dic2
+
 if __name__ == "__main__":
     test = Solution()
-    print(test.isAnagram_myself_1("anagram", "nagaram"))
-    print(test.isAnagram_myself_2("anagram", "nagaram"))
-    print(test.isAnagram_myself_3("anagram", "nagaram"))
-    print(test.isAnagram2("anagram", "nagaram"))
+    print(test.isAnagram("anagram", "nagaram"))
+    print(test.isAnagram("rat", "car"))
+
 
