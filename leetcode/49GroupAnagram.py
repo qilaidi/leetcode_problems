@@ -1,4 +1,7 @@
-from utils.timer import timethis
+import collections
+from typing import List
+
+from leetcode_problems.utils.timer import timethis
 
 
 class Solution:
@@ -93,9 +96,18 @@ class Solution:
         else:
             return True
 
+    def groupAnagrams(self, strs: List[str]) -> List[List[str]]:
+        "2 刷"
+        dic = collections.defaultdict(list)
+        for val in strs:
+            dic["".join(sorted(val))].append(val)
+        return list(dic.values())
+
+
 if __name__ == '__main__':
     test = Solution()
     print(test.groupAnagrams1(["eat","tea","tan","ate","nat","bat"]))
     print(test.groupAnagrams2(["eat","tea","tan","ate","nat","bat"]))
     print(test.groupAnagrams3(["eat","tea","tan","ate","nat","bat"]))
     print(test.groupAnagrams4(["eat","tea","tan","ate","nat","bat"]))
+    print(test.groupAnagrams(["eat","tea","tan","ate","nat","bat"]))
