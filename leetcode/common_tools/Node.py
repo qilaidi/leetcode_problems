@@ -15,13 +15,9 @@ class Node:
         m = len(node)
         j = 2
         for i in range(m):
-            if i == 0:
+            if node[i]:
                 j, current_children = Node.generate_children(j, node, m)
-                node[0].children = current_children
-            else:
-                if node[i]:
-                    j, current_children = Node.generate_children(j, node, m)
-                    node[i].children = current_children
+                node[i].children = current_children
         return node[0]
 
     @classmethod
