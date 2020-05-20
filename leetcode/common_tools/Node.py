@@ -18,7 +18,7 @@ class Node:
             if node[i]:
                 j, current_children = Node.generate_children(j, node, m)
                 node[i].children = current_children
-        return node[0]
+        return node[0] if node else None
 
     @classmethod
     def generate_children(cls, j, node, m):
