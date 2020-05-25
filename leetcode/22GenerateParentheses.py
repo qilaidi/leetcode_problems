@@ -1,7 +1,7 @@
 class Solution:
     def generateParenthesis_1(self, n):
         result = []
-        self.generate_parenthesis(n, n, "", result)
+        self.generateParenthesis_1(n, n, "", result)
         return result
 
     def generate_parenthesis_1(self, left, right, s, result):
@@ -9,9 +9,9 @@ class Solution:
             result.append(s)
             return result
         if left > 0:
-            self.generate_parenthesis(left - 1, right, s + "(", result)
+            self.generateParenthesis_1(left - 1, right, s + "(", result)
         if right > left:
-            self.generate_parenthesis(left, right - 1, s + ")", result)
+            self.generateParenthesis_1(left, right - 1, s + ")", result)
 
     def generateParenthesis_bfs(self, n):
         process = [["(", n-1, n]]
@@ -28,7 +28,7 @@ class Solution:
 
     def generateParenthesis_2(self, n):
         result = []
-        self.generate_parenthesis(n, n, "", result)
+        self.generate_parenthesis_2(n, n, "", result)
         return result
 
     def generate_parenthesis_2(self, left, right, res, result):
@@ -36,9 +36,9 @@ class Solution:
             result.append(res)
             return result
         if left > 0:
-            self.generate_parenthesis(left - 1, right, res + "(", result)
+            self.generate_parenthesis_2(left - 1, right, res + "(", result)
         if right > left:
-            self.generate_parenthesis(left, right - 1, res + ")", result)
+            self.generate_parenthesis_2(left, right - 1, res + ")", result)
 
     def generateParenthesis_dp1(self, n):
         """DP"""
@@ -58,7 +58,7 @@ class Solution:
             total.append(temp_list)
         return total[n]
 
-    def generateParenthesis(self, n):
+    def generateParenthesis1(self, n):
         """3 dfs"""
         result = []
         def generate_parenthesis(left, right, res, result):
@@ -72,9 +72,18 @@ class Solution:
         generate_parenthesis(n, n, "", result)
         return result
 
-
-
-
+    def generateParenthesis(self, n):
+        res = []
+        def helper(left, right, cur, res):
+            if right == 0:
+                res.append(cur)
+                return res
+            if left > 0:
+                helper(left - 1, right, cur + "(", res)
+            if right > left:
+                helper(left, right - 1, cur + ")", res)
+        helper(n, n, "", res)
+        return res
 
 
 
