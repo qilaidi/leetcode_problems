@@ -82,7 +82,7 @@ class Solution1:
         return res
 
 class Solution:
-    def climbStairs(self, n: int) -> int:
+    def climbStairs1(self, n: int) -> int:
         if n < 3:
             return n
         prev, current = 1, 2
@@ -91,6 +91,35 @@ class Solution:
             current += prev
             prev = temp
         return current
+
+    @lru_cache(128)
+    def climbStairs2(self, n: int) -> int:
+        """加缓存的"""
+        if n <= 2:
+            return n
+        else:
+            return self.climbStairs(n - 1) + self.climbStairs(n - 2)
+
+    def climbStairs3(self, n: int) -> int:
+        """手动加缓存的"""
+        memo = {1: 1, 2: 2}
+        def helper(n, memo):
+            if n in memo:
+                return memo[n]
+            else:
+                memo[n] = helper(n - 1, memo) + helper(n - 2, memo)
+                return memo[n]
+        return helper(n, memo)
+
+    def climbStairs(self, n: int) -> int:
+        """顺推"""
+        if n < 4:
+            return n
+        prev, res = 2, 3
+        for i in range(4, n + 1):
+            prev, res = res, (prev + res)
+        return res
+
 
 if __name__ == '__main__':
     test = Solution()
