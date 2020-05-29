@@ -13,13 +13,15 @@ class TreeNode:
         if not a_list:
             return None
         tree_node = [TreeNode(x) if x is not None else None for x in a_list]
-        m = len(tree_node)
-        for i in range(m):
+        m, i, j = len(tree_node), 0, 1
+        while i < m and j < m:
             if tree_node[i]:
-                if i + 1 < m:
-                    tree_node[i].left = tree_node[i+1]
-                if i + 2 < m:
-                    tree_node[i].right = tree_node[i+2]
+                if j < m and tree_node[j]:
+                    tree_node[i].left = tree_node[j]
+                j += 1
+                if j < m and tree_node[j]:
+                    tree_node[i].right = tree_node[j]
+                i += 1; j += 1
         return tree_node[0]
 
     @classmethod
