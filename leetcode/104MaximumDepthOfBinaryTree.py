@@ -43,5 +43,7 @@ class Solution:
 if __name__ == '__main__':
     null = None
     root = TreeNode.generate_tree([3,9,20,null,null,15,7])
+    root1 = TreeNode.generate_tree([1,2])
     test = Solution()
     print(test.maxDepth(root))
+    print(test.maxDepth(root1))
