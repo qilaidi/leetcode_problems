@@ -21,17 +21,28 @@ class TreeNode:
                 j += 1
                 if j < m and tree_node[j]:
                     tree_node[i].right = tree_node[j]
-                i += 1; j += 1
+                j += 1
+            i += 1
         return tree_node[0]
 
     @classmethod
-    def print_tree_inorder(cls, root):
-        res = []
-        while root:
-            if root.left:
-                root = root.left
-            elif not root.left:
-                res.append(root)
-            elif root.right:
-                root = root.right
+    def print_tree_preorder(cls, root):
+        res, stack = [], [root]
+        while stack:
+            current = []
+            for node in stack:
+                if node:
+                    res.append(node.val)
+                    current.append(node.left)
+                    current.append(node.right)
+                else:
+                    res.append(None)
+            stack = current
+        x = len(res) - 1
+        while x >= 0:
+            if res[x] is not None:
+                break
+            else:
+                x -= 1
+        res = res[:x + 1]
         return res
