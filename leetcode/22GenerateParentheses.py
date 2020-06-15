@@ -74,15 +74,15 @@ class Solution:
 
     def generateParenthesis(self, n):
         res = []
-        def helper(left, right, cur, res):
+        def helper(left, right, cur):
             if right == 0:
                 res.append(cur)
-                return res
+                return
             if left > 0:
-                helper(left - 1, right, cur + "(", res)
+                helper(left - 1, right, cur + "(")
             if right > left:
-                helper(left, right - 1, cur + ")", res)
-        helper(n, n, "", res)
+                helper(left, right - 1, cur + ")")
+        helper(n, n, "")
         return res
 
 

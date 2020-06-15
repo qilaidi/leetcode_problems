@@ -111,7 +111,7 @@ class Solution:
                 return memo[n]
         return helper(n, memo)
 
-    def climbStairs(self, n: int) -> int:
+    def climbStairs4(self, n: int) -> int:
         """顺推"""
         if n < 4:
             return n
@@ -119,6 +119,22 @@ class Solution:
         for i in range(4, n + 1):
             prev, res = res, (prev + res)
         return res
+
+    @lru_cache(10)
+    def climbStairs5(self, n: int) -> int:
+        if n < 3:
+            return n
+        return self.climbStairs5(n - 1) + self.climbStairs5(n - 2)
+
+    def climbStairs(self, n: int) -> int:
+        if n <= 3:
+            return n
+        x, y = 2, 3
+        for i in range(4, n + 1):
+            x, y = y, (x + y)
+        return y
+
+
 
 
 if __name__ == '__main__':
