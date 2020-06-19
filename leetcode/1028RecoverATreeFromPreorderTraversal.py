@@ -3,7 +3,6 @@
 # Create on 2020/6/18
 import collections
 
-from leetcode.common_tools.tree_node import TreeNode
 
 
 # Input: "1-2--3--4-5--6--7"
@@ -12,6 +11,8 @@ from leetcode.common_tools.tree_node import TreeNode
 # Output: [1,2,5,3,null,6,null,4,null,7]
 # Input: "1-401--349---90--88"
 # Output: [1,401,null,349,88,90]
+from leetcode_problems.leetcode.common_tools.tree_node import TreeNode
+
 
 class Solution:
     def recoverFromPreorder(self, S: str) -> TreeNode:
