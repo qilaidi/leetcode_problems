@@ -7,19 +7,22 @@ from typing import List
 class Solution:
     def permute(self, nums: List[int]) -> List[List[int]]:
         "回溯"
-        result, counter = [], len(nums)
+        m = len(nums)
+        result = []
         def helper(res, nums):
-            if len(res) == counter:
-                result.append(res[:])
+            if len(res) == m:
+                result.append(res)
                 return
-            for i in range(counter):
-                current_value = nums[i]
-                res += [current_value]
-                nums.pop(i)
-                helper(res, nums)
-                nums = current_value
+            for i in range(len(nums)):
+                temp = nums
+                helper(res + [nums[i]], nums[i + 1:])
+                nums = temp
         helper([], nums)
         return result
+
+
+
+
 
 if __name__ == '__main__':
     test = Solution()
