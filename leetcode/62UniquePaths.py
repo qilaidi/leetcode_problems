@@ -1,7 +1,7 @@
 import math
 from functools import lru_cache
 
-from utils.timer import timethis
+from leetcode_problems.utils.timer import timethis
 
 
 class Solution:
