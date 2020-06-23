@@ -39,6 +39,7 @@ class Solution:
     #     return dp(0, 0)
 
     def isMatch(self, s: str, p: str) -> bool:
+        """没搞定！！！！！！！"""
         s = '#' + s
         p = '#' + p
         m, n = len(s), len(p)
@@ -58,6 +59,7 @@ class Solution:
         return dp[-1][-1]
 
     def isMatch1(self, s, p):
+        """别人的正解！！！！"""
         table = [[False] * (len(s) + 1) for _ in range(len(p) + 1)]
         table[0][0] = True
         for i in range(2, len(p) + 1):
