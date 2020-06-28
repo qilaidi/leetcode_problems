@@ -24,6 +24,7 @@ class Solution:
 
 
 
+
 if __name__ == '__main__':
     test = Solution()
     print(test.addBinary("11", "1"))
