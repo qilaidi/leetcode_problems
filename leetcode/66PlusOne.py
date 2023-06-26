@@ -60,6 +60,23 @@ class Solution:
                 break
         return digits
 
+    def plus_one(self, digits: List[int]) -> List[int]:
+        digits.reverse()
+        dlen = len(digits)
+        i = 0
+        while i < dlen:
+            if digits[i] + 1 < 10:
+                digits[i] = digits[i] + 1
+                digits.reverse()
+                return digits
+            else:
+                digits[i] = 0
+                i += 1
+        if i == dlen:
+            digits.append(1)
+        digits.reverse()
+        return digits
+
 
 
 

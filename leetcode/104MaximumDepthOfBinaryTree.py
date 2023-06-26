@@ -1,7 +1,9 @@
 # -*- encoding: utf-8 -*-
 # Create by zq
 # Create on 2020/5/29
-from leetcode_problems.leetcode.common_tools.tree_node import TreeNode
+from typing import Optional
+
+from leetcode.common_tools.tree_node import TreeNode
 
 
 class Solution:
@@ -39,6 +41,27 @@ class Solution:
                 stack.append((depth+1, root.left))
                 stack.append((depth+1, root.right))
         return max_depth
+
+    def maxDepth(self, root: Optional[TreeNode]) -> int:
+        if not root:
+            return 0
+        stack = [root]
+        res = 0
+        flag = 0
+        while stack:
+            ss = len(stack)
+            while ss > 0:
+                node = stack.pop(0)
+                ss -= 1
+                if node:
+                    flag = 1
+                    stack.append(node.left)
+                    stack.append(node.right)
+            if flag:
+                res += 1
+                flag = 0
+        return res
+
 
 if __name__ == '__main__':
     null = None

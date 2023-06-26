@@ -22,9 +22,6 @@ class Solution:
         return "{:b}".format(int(a, 2) + int(b, 2))
 
 
-
-
-
 if __name__ == '__main__':
     test = Solution()
-    print(test.addBinary("11", "1"))
+    assert(test.addBinary("11", "1") == "100")

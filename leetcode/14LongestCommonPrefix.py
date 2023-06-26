@@ -10,7 +10,7 @@ class Solution:
             return strs[0]
         if len(strs) == 0:
             return ""
-        res= ""
+        res = ""
         for x in range(len(strs[0])):
             standard = strs[0][x]
             for y in range(1, len(strs)):
@@ -49,20 +49,16 @@ class Solution:
         for i in zip(*strs):
             if len(set(i)) == 1:
                 res += i[0]
-            else: break
+            else:
+                break
         return res
 
 
 if __name__ == '__main__':
     test = Solution()
-    print(test.longestCommonPrefix(["flower","flow","flight"]))
-    print(test.longestCommonPrefix(["dog","racecar","car"]))
-    print(test.longestCommonPrefix(["aa","a"]))
+    print(test.longestCommonPrefix(["flower", "flow", "flight"]))
+    print(test.longestCommonPrefix(["dog", "racecar", "car"]))
+    print(test.longestCommonPrefix(["aa", "a"]))
     print(test.longestCommonPrefix(["a"]))
-    print(test.longestCommonPrefix(["aa","ab"]))
+    print(test.longestCommonPrefix(["aa", "ab"]))
     print(test.longestCommonPrefix([]))
-
-
-
-
-

@@ -1,6 +1,6 @@
 from typing import List
 
-from leetcode_problems.leetcode.common_tools.tree_node import TreeNode
+from leetcode.common_tools.tree_node import TreeNode
 
 
 class Solution:
@@ -66,6 +66,18 @@ class Solution:
             root = stack.pop()
             res.append(root.val)
             root = root.right
+        return res
+
+    def inorderTraversal(self, root: TreeNode) -> List[int]:
+        res, stack = [], [root]
+        while stack:
+            node = stack.pop()
+            if not node.left:
+                res.append(node.val)
+                stack.append(node.right)
+            else:
+                stack.append(node)
+                stack.append(node.left)
         return res
 
 

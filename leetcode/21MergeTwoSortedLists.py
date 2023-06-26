@@ -1,7 +1,7 @@
 # -*- encoding: utf-8 -*-
 # Create by zq
 # Create on 2020/4/21
-from leetcode_problems.leetcode.common_tools.list_node import ListNode
+from leetcode.common_tools.list_node import ListNode
 
 
 class Solution:
@@ -47,9 +47,23 @@ class Solution:
         cur.next = l1 if l1 else l2
         return result.next
 
+    # 空间 O(1)
+    def merge_to_list(self, l1, l2):
+        pre_head = prev = ListNode(-1)
+        while l1 and l2:
+            if l1.val < l2.val:
+                prev.next = l1
+                l1 = l1.next
+            else:
+                prev.next = l2
+                l2 = l2.next
+            prev = prev.next
+        prev.next = l1 if l1 else l2
+        return pre_head.next
+
 
 if __name__ == '__main__':
     l1 = ListNode.generate([1, 2, 4])
     l2 = ListNode.generate([1, 3, 4])
     test = Solution()
-    print(ListNode.print_list_node(test.mergeTwoLists(l2, l1)))
+    print(ListNode.print_list_node(test.merge_to_list(l2, l1)))
