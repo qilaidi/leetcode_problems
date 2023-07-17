@@ -1,7 +1,7 @@
 # -*- encoding: utf-8 -*-
 # Create by zq
 # Create on 2020/3/26
-from leetcode_problems.leetcode.common_tools.list_node import ListNode
+from leetcode.common_tools.list_node import ListNode
 
 
 class Solution:
@@ -24,4 +24,19 @@ class Solution:
             if runner == walker:
                 return True
         return False
+
+    def hasCycle(self, head: ListNode) -> bool:
+        if not (head and head.next):
+            return False
+        fast, slow = head.next, head
+        while fast.next:
+            if fast == slow:
+                return True
+            fast = fast.next.next
+            slow = slow.next
+        return True
+
+
+
+
 
